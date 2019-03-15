@@ -1,10 +1,10 @@
 /**
  * 2019-03-15
- * Hash Table implementada con un Arreglo Dinamico de T.
+ * Hash Table implementada con un Arreglo Dinamico de listas encadenadas T.
  * El arreglo al llenarse (llegar a su maxima capacidad) debe aumentar su capacidad.
  *
  */
-public class HashTable<T extends Comparable<T>,k>
+public class HashTableChaining<K extends Comparable<K>,V>
 {
 	//Atributos
 	/**
@@ -14,14 +14,18 @@ public class HashTable<T extends Comparable<T>,k>
 	/**
 	 * Numero de llaves en uso
 	*/
-	
-	
+	/**
+	 * Numero de asociados
+	*/
 	//Constructor
-	public HashTable ()
+	public HashTableChaining ()
 	{
 		
 	}
+		
 	//Métodos
+
+	
 	/**
 	 * Agregar una dupla (K,V) a la tabla. Si la llave K existe reemplaza su valor V asociado
 	 * V no puede ser null.
@@ -52,6 +56,4 @@ public class HashTable<T extends Comparable<T>,k>
 	{
 		return null;
 	}
-	
-	
 }
