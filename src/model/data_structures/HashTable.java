@@ -5,7 +5,7 @@
  * @author Fernando De la Rosa
  *
  */
-public class HashTable<T extends Comparable<T>,k> 
+public class HashTable<T extends Comparable<T>,k>
 {
 
 }
