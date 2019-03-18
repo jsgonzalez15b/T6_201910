@@ -1,6 +1,6 @@
 package model.data_structures;
 
-public interface IArregloDinamico<T extends Comparable<T>> {
+public interface IArregloDinamico<K extends Comparable<K>,V> {
 
 	/**
 	 * Retornar el numero de elementos en el arreglo
@@ -9,39 +9,39 @@ public interface IArregloDinamico<T extends Comparable<T>> {
 	int darTamano( );
 	
 	/**
-         * retorna el ultimo elemento del arreglo
-	 * @return ultimo elemento del arreglo
+         * retorna la ultima dupla del arreglo
+	 * @return ultimo dupla del arreglo
          */
-	T darUltimo();
+	Dupla darUltimo();
 	
 	
 	/**
-	 * Retornar el elemento en la posicion i
+	 * Retornar la dupla en la posicion i
 	 * @param i posicion de consulta
-	 * @return elemento de consulta. null si no hay elemento en posicion.
+	 * @return dupla de consulta. null si no hay dupla en posicion.
 	 */
-	T darElemento( int i );
+	Dupla darElemento( int i );
 
 	/**
 	 * Agregar un dato de forma compacta (en la primera casilla disponible) 
 	 * Caso Especial: Si el arreglo esta lleno debe aumentarse su capacidad, agregar el nuevo dato y deben quedar multiples casillas disponibles para futuros nuevos datos.
 	 * @param dato nuevo elemento
 	 */
-	public void agregar( T dato );
+	public void agregar( Dupla dato );
 		
 	/**
 	 * Buscar un dato en el arreglo.
 	 * @param dato Objeto de busqueda en el arreglo
 	 * @return elemento encontrado en el arreglo (si existe). null si no se encontro el dato.
 	 */
-	T buscar(T dato);
+	Dupla buscar(Dupla dato);
 	
 	/**
-	 * Eliminar un dato del arreglo.
+	 * Eliminar una dupla del arreglo.
 	 * Los datos restantes deben quedar "compactos" desde la posicion 0.
 	 * @param dato Objeto de eliminacion en el arreglo
 	 * @return dato eliminado
 	 */
-	T eliminar( T dato );
+	Dupla eliminar( Dupla dato );
 
 }

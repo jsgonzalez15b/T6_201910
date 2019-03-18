@@ -20,14 +20,19 @@ public class Dupla<K extends Comparable<K>,V>
 		/**
 		 * Lista de tamano variable para implementacion chaining
 		 */
-		//ATRIBUTO PARA IMPLEMENTACION DE ARREGLO DINAMICO CHAINING
+		private ArregloDinamico chain;
 		
 		
 		
-		//MÃ©todo Constructor
+		//Metodo Constructor
 		public Dupla (K pKey,V pValue)
 		{
+			//se inicializan la llave y valor de la dupla
+			theKey = pKey;
+			theValue = pValue;
 			
+			//Inicialmente un unico elemento que corresponde a una llave
+			chain= new ArregloDinamico<K, V>(1); //para linear siempre es de tamano 1
 		}
 
 		//Metodos del nodo
@@ -48,5 +53,12 @@ public class Dupla<K extends Comparable<K>,V>
 			return theKey;
 		}
 
-		//METODOS PARA IMPLEMENTACION DE ARREGLO DINAMICO CHAINING
+		/**
+		 * metodo que añade un elemento a la llave en chaining. 
+		 */
+		public void add(V pValue)
+		{
+			Dupla nuevaDupla = new Dupla(theKey, pValue);
+			chain.agregar(nuevaDupla);
+		}
 }

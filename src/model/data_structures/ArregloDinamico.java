@@ -1,6 +1,7 @@
 package model.data_structures;
 
-public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamico<T>  {
+public class ArregloDinamico<K extends Comparable<K>,V> implements IArregloDinamico<K,V>  
+{
 	/**
 	 * Capacidad maxima del arreglo
 	 */
@@ -13,11 +14,11 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
 	/**
 	 * ultimo elemento de la lista
 	 */
-        private T ultimo;
+        private Dupla ultimo;
         /**
          * Arreglo de elementos de tamaNo maximo
          */
-        private T elementos[ ];
+        private Dupla elementos[ ];
 
         /**
          * Construir un arreglo con la capacidad maxima inicial.
@@ -25,27 +26,27 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
          */
 		public ArregloDinamico( int max )
         {
-               elementos = (T[]) new Object[max];
+               elementos = (Dupla[]) new Object[max];
                tamanoMax = max;
                tamanoAct = 0;
-	       ultimo = null;
+               ultimo = null;
         }
 	
 	/**
          * retorna el ultimo elemento del arreglo
          */
-		public T darUltimo()
+		public Dupla darUltimo()
         {
                return ultimo;
         }
         
-		public void agregar( T dato )
+		public void agregar( Dupla dato )
         {
                if ( tamanoAct == tamanoMax )
                {  // caso de arreglo lleno (aumentar tamaNo)
                     tamanoMax = 2 * tamanoMax;
-                    T [ ] copia = elementos;
-                    elementos = (T[])new Object[tamanoMax];
+                    Dupla [ ] copia = elementos;
+                    elementos = (Dupla[])new Object[tamanoMax];
                     for ( int i = 0; i < tamanoAct; i++)
                     {
                      	 elementos[i] = copia[i];
@@ -53,18 +54,18 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
             	    System.out.println("Arreglo lleno: " + tamanoAct + " - Arreglo duplicado: " + tamanoMax);
                }	
                elementos[tamanoAct] = dato;
-	       ultimo = dato; //se actualiza el ultimo elemento
+               ultimo = dato; //se actualiza el ultimo elemento
                tamanoAct++;
        }
 
-		public int darTamano() {
-			// TODO implementar
+		public int darTamano() 
+		{
 			return tamanoAct;
 		}
 
-		public T darElemento(int i) {
-			// TODO implementar
-			T buscado=null;   
+		public Dupla darElemento(int i)
+		{
+			Dupla buscado=null;   
 			for(int j=0; j<tamanoAct && buscado==null;j++) {
 				if(j==i) {
 					buscado=elementos[j];
@@ -73,12 +74,12 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
 			return buscado;
 		}
 
-		public T buscar(T dato) {
+		public Dupla buscar(Dupla dato) {
 			// TODO implementar
 			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
 			int inicio=0;
 			int fin=elementos.length-1;
-			T buscado=null; 
+			Dupla buscado=null; 
 			while (inicio<=fin && buscado==null) {
 				int mitad=(inicio+fin)/2;
 				if(dato.compareTo(elementos[mitad])==0){
@@ -92,10 +93,10 @@ public class ArregloDinamico<T extends Comparable<T>> implements IArregloDinamic
 			return buscado; 
 		}
 
-		public T eliminar(T dato) {
+		public Dupla eliminar(Dupla dato) {
 			// TODO implementar
 			// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-			T aEliminar=null;
+			Dupla aEliminar=null;
 			for (int i=0; i<elementos.length; i++) {
 				if(elementos[i].compareTo(dato)==0) {
 					aEliminar=elementos[i];
