@@ -4,13 +4,13 @@ public class HashTableLinear<K extends Comparable<K>,V> implements IHashTableLin
 {
 	//Atributos
 		/**
-		 * Arreglo de tamaño variable que almacena la informacion del Hash (NO ARREGLO DINAMICO)
+		 * Arreglo que almacena la informacion del Hash (NO ARREGLO DINAMICO)
 		*/
-		
+		private Dupla[] hashTable;
 		/**
 		 * Numero de llaves en uso
 		*/
-		
+		private int nKeys;
 		
 		//Constructor
 		public HashTableLinear()
