@@ -74,13 +74,7 @@ public class Stack<T> implements IStack<T>{
 		return new Iterador<T>(primero);
 	}
 	
-	/**
-	 * metodo de comparacion (Comparable<T>) 
-	 *@return 1,0,-1 segun la relacion entre los elementos.
-	 */
-	public int compareTo(T pItem)
-	{
-		
-		return 1;
+	public Nodo<T> darPrimero(){
+		return primero;
 	}
 }
