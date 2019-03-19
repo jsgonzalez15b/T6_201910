@@ -1,11 +1,11 @@
 package main;
 
-import controller.Controller;
+import controller.controller;
 
 public class MVC {
 
 	public static void main(String[] args) {
-		Controller controler = new Controller();
+		controller controler = new controller();
 		controler.run();
 	}
 
