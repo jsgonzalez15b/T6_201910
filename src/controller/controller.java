@@ -42,7 +42,10 @@ public class controller
 	 * Pila donde se van a cargar los datos de los archivos
 	 */
 	private IStack<VOMovingViolations> movingViolationsStack;
-
+	
+	private HashTableLinear linear; 
+	
+	private HashTableChaining chain; 
 
 	public controller() {
 		view = new MovingViolationsManagerView();
@@ -50,6 +53,8 @@ public class controller
 		//TODO, inicializar la pila y la cola
 		movingViolationsQueue = null;
 		movingViolationsStack = null;
+		linear=null; 
+		chain=null; 
 	}
 
 	public void run() {
@@ -97,6 +102,9 @@ public class controller
 	{
 		//estructuras de almacenamiento de infracciones
 		movingViolationsStack= new Stack<VOMovingViolations>();
+		linear= new HashTableLinear();
+		chain= new HashTableChaining(); 
+		
 		//creacion e inicializacion de arreglo con nombre de los archivos de infracciones por mes 
 		String[] nombresArchivos=new String[6];
 		nombresArchivos[0]="."+File.separator+"data"+File.separator+"Moving_Violations_Issued_in_January_2018.json";
@@ -113,7 +121,61 @@ public class controller
 				
 				for(int j=0; arr!=null&&j<arr.size(); j++){
 					JsonObject obj=(JsonObject) arr.get(j);
-					System.out.println(obj);
+					int id=0; 
+					if (obj.get("OBJECTID")!=null){
+					id=Integer.parseInt(obj.get("OBJECTID").getAsString());
+					}
+					String location="NaN";
+					if(obj.get("LOCATION")!=null){
+					location=obj.get("LOCATION").getAsString();
+					}
+					int adressId=0; 
+					if(obj.get("ADDRESS_ID")!=null){
+					adressId=Integer.parseInt(obj.get("ADDRESS_ID").getAsString());
+					}
+					int coordx=0; 
+					if(obj.get("XCOORD")!=null){
+					coordx=Integer.parseInt(obj.get("XCOORD").getAsString());
+					}
+					int coordy=0; 
+					if(obj.get("YCOORD")!=null){
+					coordy=Integer.parseInt(obj.get("YCOORD").getAsString());
+					}
+					double fineAMT=0; 
+					if(obj.get("FINEAMT")!=null){
+					fineAMT=Double.parseDouble(obj.get("FINEAMT").getAsString());
+					}
+					double totalPaid=0; 
+					if(obj.get("TOTALPAID")!=null){
+					totalPaid=Double.parseDouble(obj.get("TOTALPAID").getAsString());
+					}
+					double penalty1=0; 
+					if(obj.get("PENALTY1")!=null){
+					penalty1=Double.parseDouble(obj.get("PENALTY1").getAsString());
+					}
+					double penalty2=0; 
+					if(obj.get("PENALTY2")!=null){
+					penalty2=Double.parseDouble(obj.get("PENALTY2").getAsString());
+					}
+					String accidenIndicator="NaN";
+					if(obj.get("ACCIDENTINDICATOR")!=null){
+					accidentIndicator=obj.get("ACCIDENTINDICATOR").getAsString();
+					}
+					String ticketIssueDate="NaN"; 
+					if(obj.get("TICKETISSUEDATE")!=null){
+					ticketIssueDate=obj.get("TICKETISSUEDATE").getAsString();
+					}
+					String violationcode="NaN";
+					if(obj.get("VIOLATIONCODE")!=null){
+					violationcode=obj.get("VIOLATIONCODE").getAsString(); 
+					}
+					String description="NaN"; 
+					if(obj.get("VIOLATIONDESC")!=null){
+					description=obj.get("VIOLATIONDESC").getAsString(); 
+					}
+					VOMovingViolations vo= new VOMovingViolations(id,location,ticketIssueDate,totalPaid,accidenIndicator,description,violationcode,fineAMT,adressId,penalty1,penalty2,coordx,coordy);
+					linear.put(j,vo); 
+					chain.put(j,vo); 					
 				}
 				
 			}catch (JsonIOException e1 ) {
