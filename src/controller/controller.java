@@ -11,8 +11,6 @@ import com.opencsv.CSVReader;
 import com.sun.corba.se.impl.orbutil.graph.Node;
 import com.sun.javafx.scene.paint.GradientUtils.Parser;
 
-import model.data_structures.HashTableChaining;
-import model.data_structures.HashTableLinear;
 import model.data_structures.IQueue;
 import model.data_structures.IStack;
 import model.data_structures.Iterador;
@@ -177,7 +175,8 @@ public class controller
 					}
 					VOMovingViolations vo= new VOMovingViolations(id,location,ticketIssueDate,totalPaid,accidenIndicator,description,violationcode,fineAMT,adressId,penalty1,penalty2,coordx,coordy);
 					linear.put(j,vo); 
-					chain.put(j,vo); 					
+					chain.put(j,vo); 
+					movingViolationsStack.push(vo); 
 				}
 				
 			}catch (JsonIOException e1 ) {
@@ -215,6 +214,67 @@ public class controller
 			objectid=iter.next().objectId();
 		}
 		return retornar; 
+	}
+	
+	
+	public HashTableLinear<int, ArrayList<VOMovingViolations>> infraccionesConAccAddressId(int pAddressId){
+		HashTableLinear<int, ArrayList<VOMovingViolations>> retornar= new HashTableLinear<>(); 
+		ArrayList<int> revisados=new ArrayLsit<>();
+		Iterador<VOMovingViolation> iter= (Iterador<VOMovingViolation>) auxiliar.iterator();
+		VOMovingViolation actual= iter.next();
+		while(iter.hasNext()){
+		if(!revisar(revisados,actual.getAdressId)){
+			revisados.add(actual.getAdressId);
+			Iterador<VOMovingViolation> iter2= (Iterador<VOMovingViolation>) auxiliar.iterator();
+			VOMovingViolation actual2= iter2.next();
+			IStack<VOMovingViolations> auxiliar= new Stack<>();
+			while(iter2.hasNext()){
+			if(actual2.getAdressId==actual.getAdressId){
+			auxiliar.push(actual2);
+			}
+				actual2=iter2.next();
+			}
+			retornar.put(actual.getAdressId,auxiliar);
+			pos++;	
+		}
+			actual=iter.next();
+		}		
+		return retornar; 	
+	}
+	
+	public HashTableChaining<int, ArrayList<VOMovingViolations>> infraccionesConAccAddressId(int pAddressId){
+		HashTableChaining<int, ArrayList<VOMovingViolations>> retornar= new HashTableChaining<>(); 
+		ArrayList<int> revisados=new ArrayLsit<>();
+		Iterador<VOMovingViolation> iter= (Iterador<VOMovingViolation>) auxiliar.iterator();
+		VOMovingViolation actual= iter.next();
+		while(iter.hasNext()){
+		if(!revisar(revisados,actual.getAdressId)){
+			revisados.add(actual.getAdressId);
+			Iterador<VOMovingViolation> iter2= (Iterador<VOMovingViolation>) auxiliar.iterator();
+			VOMovingViolation actual2= iter2.next();
+			IStack<VOMovingViolations> auxiliar= new Stack<>();
+			while(iter2.hasNext()){
+			if(actual2.getAdressId==actual.getAdressId){
+			auxiliar.push(actual2);
+			}
+				actual2=iter2.next();
+			}
+			retornar.put(actual.getAdressId,auxiliar);
+			pos++;	
+		}
+			actual=iter.next();
+		}		
+		return retornar; 	
+	}
+	
+	public boolean revisar(ArrayList<int> arreglo, int pAddress){
+		boolean respuesta=false; 
+		for (int i=0; i<arreglo.size()&& !respuesta, i++){
+		if(arreglo.get(i)==pAddress){
+		respuesta=true; 
+		}
+		}
+		return respuesta; 
 	}
 
 }
