@@ -3,6 +3,17 @@ package model.data_structures;
 public interface IHashTableLinear<K extends Comparable<K>,V>
 {
 	/**
+	 * Calcula el hash asociado a la llave
+	 * @return.
+	*/
+	public int	hash(K pLlave);
+	
+	/**
+	 * Actualiza la posicion de todos los elementos del hashTable segun su llave y el nuevo tamano
+	*/
+	public void	reHash();
+	
+	/**
 	 * Agregar una dupla (K,V) a la tabla. Si la llave K existe reemplaza su valor V asociado
 	 * V no puede ser null.
 	*/
