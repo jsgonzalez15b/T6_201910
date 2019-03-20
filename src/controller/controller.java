@@ -217,7 +217,7 @@ public class controller
 	}
 	
 	
-	public HashTableLinear<int, ArrayList<VOMovingViolations>> infraccionesConAccAddressId(int pAddressId){
+	public HashTableLinear<int, ArrayList<VOMovingViolations>> infraccionesConAccAddressIdLinear(int pAddressId){
 		HashTableLinear<int, ArrayList<VOMovingViolations>> retornar= new HashTableLinear<>(); 
 		ArrayList<int> revisados=new ArrayLsit<>();
 		Iterador<VOMovingViolation> iter= (Iterador<VOMovingViolation>) auxiliar.iterator();
@@ -242,7 +242,7 @@ public class controller
 		return retornar; 	
 	}
 	
-	public HashTableChaining<int, ArrayList<VOMovingViolations>> infraccionesConAccAddressId(int pAddressId){
+	public HashTableChaining<int, ArrayList<VOMovingViolations>> infraccionesConAccAddressIdChaining(int pAddressId){
 		HashTableChaining<int, ArrayList<VOMovingViolations>> retornar= new HashTableChaining<>(); 
 		ArrayList<int> revisados=new ArrayLsit<>();
 		Iterador<VOMovingViolation> iter= (Iterador<VOMovingViolation>) auxiliar.iterator();
