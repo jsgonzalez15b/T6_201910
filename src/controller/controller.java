@@ -11,6 +11,8 @@ import com.opencsv.CSVReader;
 import com.sun.corba.se.impl.orbutil.graph.Node;
 import com.sun.javafx.scene.paint.GradientUtils.Parser;
 
+import model.data_structures.HashTableChaining;
+import model.data_structures.HashTableLinear;
 import model.data_structures.IQueue;
 import model.data_structures.IStack;
 import model.data_structures.Iterador;
